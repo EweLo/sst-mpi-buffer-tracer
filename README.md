@@ -17,7 +17,7 @@ This element should also work with newer versions of SST, but it has only been t
 2. Make sure you **enable** Ariel MPI Support with the `--enable-ariel-mpi` flag when configuring sst-elements and also make sure you compile Ariel with **Intel Pin Tool 3.31** (as explained on [their website](https://sst-simulator.org/SSTPages/SSTBuildAndInstall_15dot1dot0_SeriesAdditionalExternalComponents/)).
 
 > [!CAUTION]\
-> With sst-elements v15.1.0 (and possibly also newer versions), the Ariel API Makefile is not properly implemented, which causes Ariel to be always build wihout MPI support, even if the `--enable-ariel-mpi` flag is set.
+> With sst-elements v15.1.0 (and possibly also newer versions), the Ariel API Makefile is not properly implemented, which causes Ariel to be always build without MPI support, even if the `--enable-ariel-mpi` flag is set.
 > This means you have to manually edit the `src/sst/elements/ariel/api/Makefile.am` in sst-elements, as described in [this issue](https://github.com/sstsimulator/sst-elements/issues/2624) I opened, before running `./configure`.
 
 3. Make sure you have correctly set the `SST_ELEMENTS_HOME` environment variable, as described in the SST installation instructions.
@@ -45,7 +45,6 @@ This element should also work with newer versions of SST, but it has only been t
 1. Compile the target MPI application as usual but make sure to link it against the Ariel API.
    - You can find an example Makefile in the `example/` directory of this repository or in the [tests of Ariel in sst-elements](https://github.com/sstsimulator/sst-elements/tree/master/src/sst/elements/ariel/tests/testMPI).
    - For using the 2D heat stencil example, that I used in my thesis, read the instructions in the `example/` directory of this repository.
-
 2. Run the simulation configured in `sst-simulation-configurable.py` with SST
    ```
    sst sst-simulation-configurable.py -- -r <nranks> <binary> -- [args ...]
@@ -56,11 +55,12 @@ This element should also work with newer versions of SST, but it has only been t
 ### Configuring the simulation
 The SST simulation can be configured in two ways:
 1. By editing the `sst-simulation-configurable.py` file directly and changing the parms of the different components.
-2. By creating a JSON file with the desired configuration and passing it to the simulation with the `-c` flag, e.g.\
+   
+2. By creating a JSON file with the desired configuration and passing it to the simulation with the `-c` flag, e.g.
    ```
    sst sst-simulation-configurable.py -- -c config.json -i 0 -r <nranks> <binary> -- [args ...]
    ```
-   where `congig.json` is a JSON file containing the desired configuration of the simulation and `-i` specifying the index of the configuration to use (the JSON file can contain multiple configurations).\
+   where `congig.json` is a JSON file containing the desired configuration of the simulation and `-i` specifying the index of the configuration to use (the JSON file can contain multiple configurations).
     - You can find an example JSON configuration in the `model_configs_example.json` file in this repository.
     - The JSON configuration file will only override the parameters specified in the JSON file, so you can also use it to only change a few parameters of the simulation and keep the rest of the default configuration in the `sst-simulation-configurable.py` file.
 
