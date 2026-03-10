@@ -69,3 +69,19 @@ The SST simulation can be configured in two ways:
 > otherwise no cache listeners will be loaded.
 > This is not required for the normal usage of the tracer and was only used for validating the tracer in my thesis (`src/cachelistener/perfCacheListener.cpp`)
 > or for testing whether it's possible to detect prefetches with the tracer (`src/cachelistener/tracerCacheListener.cpp`).
+
+## Citation [![DOI](https://zenodo.org/badge/1177712372.svg)](https://doi.org/10.5281/zenodo.18940825)
+This repository is archived using Zenodo to make it easier to cite the code in research and to ensure that the code is preserved in its current state, even if the GitHub repository is deleted or modified in the future.
+If you use this code in your research, you can cite it like this:
+```
+@software{Ewen_sst-mpi-buffer-tracer_2026,
+   author = {Ewen, Louis},
+   doi = {10.5281/zenodo.18940826},
+   license = {["MIT"]},
+   month = mar,
+   title = {{sst-mpi-buffer-tracer}},
+   url = {https://github.com/EweLo/sst-mpi-buffer-tracer/tree/v1.0.0},
+   version = {v1.0.0},
+   year = {2026}
+}
+```
