@@ -1,0 +1,48 @@
+--- stencil_mpi_nobuf_optane_orig.cpp	2026-03-10 16:08:39.403070000 +0100
++++ stencil_mpi_nobuf_optane.cpp	2026-03-10 16:24:45.699776932 +0100
+@@ -19,6 +19,9 @@
+ #include <sys/mman.h>
+ #include <atomic> //atomics
+ 
++#ifndef DISABLE_ARIEL_API
++#include <arielapi.h>
++#endif
+ 
+ void* alloc_shared_mem(std::string shared_memory_folder_prefix, std::string var_name, int size)
+ {
+@@ -296,8 +299,23 @@
+   MPI_Barrier(MPI_COMM_WORLD); //wait for all locks to be set up
+   MPI_Request reqs[8];
+ 
++  for (int i = 0; i < 8; i++) reqs[i] = MPI_REQUEST_NULL;
++
++#ifndef DISABLE_ARIEL_API
++  ariel_enable();
++  ariel_output_stats();
++#endif
++
+   double heat; // total heat in system
+   for(int iter=0; iter<niters; ++iter) {
++#ifndef DISABLE_ARIEL_API
++    if (r == 0 && (iter % 1 == 0)) {
++#else
++    if ((iter % 100 == 0)) {
++#endif
++      std::cout << "Rank " << r << ", iteration " << iter << "/" << niters << std::endl;
++    }
++
+     // refresh heat sources
+     for(int i=0; i<locnsources; ++i) {
+       aold[ind(locsources[i][0],locsources[i][1])] += energy; // heat source
+@@ -539,6 +557,11 @@
+   }
+   t+=MPI_Wtime();
+ 
++#ifndef DISABLE_ARIEL_API
++  ariel_output_stats();
++  ariel_disable();
++#endif
++
+   // get final heat in the system
+   double rheat;
+   MPI_Allreduce(&heat, &rheat, 1, MPI_DOUBLE, MPI_SUM, comm);
