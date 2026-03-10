@@ -1,0 +1,29 @@
+{
+  "runs": [
+    {
+      "name": "l1_no_pf_l2_stride_l3_stride",
+      "description": "Example configuration with no L1 prefetcher, stride prefetchers for L2 and L3, MESI coherence protocol, and LRU replacement policy for all cache levels.",
+      "l1": {
+        "cache_type": "inclusive",
+        "coherence_protocol": "MESI",
+        "replacement_policy": "lru"
+      },
+      "l2": {
+        "cache_type": "inclusive",
+        "coherence_protocol": "MESI",
+        "replacement_policy": "lru"
+      },
+      "l2_prefetcher": {
+        "prefetcher_subcomponent": "cassini.StridePrefetcher"
+      },
+      "l3": {
+        "cache_type": "inclusive",
+        "coherence_protocol": "MESI",
+        "replacement_policy": "lru"
+      },
+      "l3_prefetcher": {
+        "prefetcher_subcomponent": "cassini.StridePrefetcher"
+      }
+    }
+  ]
+}

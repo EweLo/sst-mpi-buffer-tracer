@@ -10,7 +10,7 @@ from datetime import datetime
 
 parser = argparse.ArgumentParser(
     prog=f'sst {os.path.basename(__file__)} --',
-    usage=f'sst {os.path.basename(__file__)} -- [-h] [-r [NRANKS]] [-t [TRACERANK]] [-o [OUT_DIR]] [-c CONFIG] [-i INDEX] [binary] -- [args ...]',
+    usage=f'sst {os.path.basename(__file__)} -- [-h] -r [NRANKS] [-t [TRACERANK]] [-o [OUT_DIR]] [-c CONFIG] [-i INDEX] [binary] -- [args ...]',
     description='SST Simulation with configurable cache parameters.'
 )
 parser.add_argument('-r', '--nranks', nargs='?', type=int, help='Number of MPI ranks', default=1)
@@ -231,7 +231,7 @@ for x in range(0, corecount):
     l1d = sst.Component("l1cache_" + str(x), "memHierarchy.Cache")
     l1d.addParams(l1_params)
 
-    l1d.setSubComponent("listener", "customTracer.perfCacheListener")
+    #l1d.setSubComponent("listener", "customTracer.perfCacheListener")
 
     if l1_prefetcher_params is not None and 'prefetcher_subcomponent' in l1_prefetcher_params and l1_prefetcher_params['prefetcher_subcomponent'] != "":
         l1d_prefetcher = l1d.setSubComponent("prefetcher", l1_prefetcher_params['prefetcher_subcomponent'])
@@ -249,7 +249,7 @@ for x in range(0, corecount):
     l2 = sst.Component("l2cache_" + str(x), "memHierarchy.Cache")
     l2.addParams(l2_params)
 
-    l2.setSubComponent("listener", "customTracer.perfCacheListener")
+    #l2.setSubComponent("listener", "customTracer.perfCacheListener")
 
     if l2_prefetcher_params is not None and 'prefetcher_subcomponent' in l2_prefetcher_params and l2_prefetcher_params['prefetcher_subcomponent'] != "":
         l2_prefetcher = l2.setSubComponent("prefetcher", l2_prefetcher_params['prefetcher_subcomponent'])
@@ -267,7 +267,7 @@ for x in range(0, corecount):
 l3 = sst.Component("l3cache", "memHierarchy.Cache")
 l3.addParams(l3_params)
 
-l3.setSubComponent("listener", "customTracer.perfCacheListener")
+#l3.setSubComponent("listener", "customTracer.perfCacheListener")
 
 if l3_prefetcher_params is not None and 'prefetcher_subcomponent' in l3_prefetcher_params and l3_prefetcher_params['prefetcher_subcomponent'] != "":
     l3_prefetcher = l3.setSubComponent("prefetcher", l3_prefetcher_params['prefetcher_subcomponent'])
@@ -301,7 +301,7 @@ sst.enableAllStatisticsForComponentType("ariel.ariel")
 sst.enableAllStatisticsForComponentType("memHierarchy.Cache")
 sst.enableAllStatisticsForComponentType("cassini.StridePrefetcher")
 sst.enableAllStatisticsForComponentType("cassini.NextBlockPrefetcher")
-sst.enableAllStatisticsForComponentType("customTracer.perfCacheListener")
+#sst.enableAllStatisticsForComponentType("customTracer.perfCacheListener")
 
 # sst.enableStatisticsForComponentName("ariel0", ["read_requests", "write_requests"], {}, True)
 #
