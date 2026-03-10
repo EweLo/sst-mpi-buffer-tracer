@@ -14,6 +14,14 @@
 #include <csignal>
 #include <sys/wait.h>
 
+/* This file is copied from mpilauncher.cc in the Ariel component in the sst-elements repository, with some minor modifications.
+ * The original file can be found here: https://github.com/sstsimulator/sst-elements/blob/e39ffe4faf0c487641cebac48076cd3c4533883f/src/sst/elements/ariel/mpi/mpilauncher.cc
+ *
+ * This file is therefore EXCLUDED from the MIT license of this repository, and is instead licensed under the license of the original file, which can be found here:
+ * https://github.com/sstsimulator/sst-elements/blob/v15.1.0_Final/LICENSE.md
+*/
+
+
 /*
  *  SLURM-specific MPI launcher for Ariel simulations
  *  Ariel forks this process which initiates mpirun
@@ -23,14 +31,6 @@
  *  will run on the node with SST, and the remaining
  *  ranks will be distributed on the other nodes.
  */
-
-/* This file is copied from mpilauncher.cc in the Ariel component in the sst-elements repository, with some minor modifications.
- * The original file can be found here: https://github.com/sstsimulator/sst-elements/blob/e39ffe4faf0c487641cebac48076cd3c4533883f/src/sst/elements/ariel/mpi/mpilauncher.cc
- *
- * This file is therefore EXCLUDED from the MIT license of this repository, and is instead licensed under the license of the original file, which can be found here: 
- * https://github.com/sstsimulator/sst-elements/blob/v15.1.0_Final/LICENSE.md
-*/
-
 
 #define TRACING_LIB_PATH "build/libmpi_trace.so"
 
