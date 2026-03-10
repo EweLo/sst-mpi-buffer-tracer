@@ -72,7 +72,7 @@ The SST simulation can be configured in two ways:
 
 ## Citation [![DOI](https://zenodo.org/badge/1177712372.svg)](https://doi.org/10.5281/zenodo.18940825)
 This repository is archived using Zenodo to make it easier to cite the code in research and to ensure that the code is preserved in its current state, even if the GitHub repository is deleted or modified in the future.
-If you use this code in your research, you can cite it like this:
+If you use this software or code in your research, you can cite it like this:
 ```
 @software{Ewen_sst-mpi-buffer-tracer_2026,
    author = {Ewen, Louis},
